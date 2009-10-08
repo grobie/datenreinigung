@@ -1,7 +1,7 @@
 class Clean
 
   def self.insert(values)
-    query = 'INSERT INTO "kunden" ("origid","origtable","anrede","titel","vorname","mittelname","nachname","strasse","hausnummervon","hausnummerbis","postfach","postleitzahl","ort","ortzusatz","vorwahl","telefonnummer","geburtsdatum") VALUES (' + values.join('),(') + ")\n\n"
+    query = 'INSERT INTO kunden (origid,origtable,anrede,titel,vorname,mittelname,nachname,strasse,hausnummervon,hausnummerbis,postfach,postleitzahl,ort,ortzusatz,vorwahl,telefonnummer,geburtsdatum) VALUES (' + values.join('),(') + ')'
     ActiveRecord::Base.connection.execute(query)
   end
 

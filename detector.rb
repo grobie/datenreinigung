@@ -21,7 +21,7 @@ class Detector
     end
     
     if @save
-      query = 'INSERT INTO "matches" ("kunde1_id","kunde2_id","key","distance") VALUES (' + values.join('),(') + ")\n\n"
+      query = 'INSERT INTO matches (kunde1_id,kunde2_id,key,distance) VALUES (' + values.join('),(') + ')'
       ActiveRecord::Base.connection.execute(query)
     end
   end
