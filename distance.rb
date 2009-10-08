@@ -1,4 +1,5 @@
 require 'amatch'
+require 'unicode'
 
 module Distance
   include Amatch
@@ -9,10 +10,10 @@ module Distance
   end
   
   def self.edit_distance_initial(s1, s2)
-    s1,s2 = s1.downcase, s2.downcase
-    if s1 =~ /^[a-zäöüÄÖÜ]\./ || s2 =~ /^[a-zäöüÄÖÜ]\./
-      i1 = s1 =~ /^[äöüÄÖÜ]/ ? s1[0,2] : s1[0,1]
-      i2 = s2 =~ /^[äöüÄÖÜ]/ ? s2[0,2] : s2[0,1]
+    s1,s2 = Unicode.downcase(s1), Unicode.downcase(s2)
+    if s1 =~ /^[a-zäöüÄÖÜ]\.*/u || s2 =~ /^[a-zäöüÄÖÜ]\.*/u
+      i1 = s1 =~ /^[äöüÄÖÜ]/u ? s1[0,2] : s1[0,1]
+      i2 = s2 =~ /^[äöüÄÖÜ]/u ? s2[0,2] : s2[0,1]
       i1 == i2 ? 0 : 1
     else
       edit_distance(s1,s2)
