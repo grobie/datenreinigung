@@ -1,0 +1,16 @@
+database:
+  adapter: "postgresql"
+  
+  postgresql:
+    host:     "localhost"
+    username: "postgres"
+    database: "datenreinigung"
+  
+  mysql:
+    host:     "localhost"
+    username: "root"
+    database: "datenreinigung"
+
+detector:
+  save: true
+  keys: ["nachvorstrasse"]
