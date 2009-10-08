@@ -6,7 +6,7 @@ class Clean
   end
 
   def self.process
-    %w(Versand).each do |klass|
+    %w(Versand Marketing Webshop).each do |klass|
       puts klass
 
       i = 0
