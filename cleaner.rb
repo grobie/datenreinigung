@@ -105,6 +105,10 @@ module Cleaner
         year = "19#{$3}".to_i
       end
       
+      unless day && month && year
+        return nil
+      end
+      
       if month > 12
         day, month = month, day
       end
@@ -114,7 +118,7 @@ module Cleaner
       begin
         date = Date.parse("#{year}-#{month}-#{day}")
       rescue ArgumentError
-        if tries < 1 
+        if tries < 1
           tries += 1
           # correct days
           if day > 31 || (month == 2 && day > 28) || (month % 2 == 0 && day > 30)
