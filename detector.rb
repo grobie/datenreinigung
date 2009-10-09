@@ -48,7 +48,7 @@ class Detector
         output(result, key)
         
         finish = Time.now
-        puts "  processed #{kunden.size} objects and found #{result.size} duplicates in #{time_format(finish-retrieve)} minutes (select: #{time_format(detect-retrieve)}, detect: #{time_format(insert-detect)}, insert: #{time_format(finish-insert)})"
+        puts "  #{("%0"+steps.to_s.size.to_s+"d") % (step+1)}: processed #{kunden.size} objects and found #{result.size} duplicates in #{time_format(finish-retrieve)} minutes (select: #{time_format(detect-retrieve)}, detect: #{time_format(insert-detect)}, insert: #{time_format(finish-insert)})"
       end
     end
   end
