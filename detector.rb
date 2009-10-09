@@ -16,8 +16,8 @@ class Detector
     end
     
     if Datenreinigung::Config["detector"]["save"] && !values.empty?
-      query = 'INSERT INTO matches (kunde1_id,kunde2_id,`key`,distance) VALUES (' + values.join('),(') + ')'
-      ActiveRecord::Base.connection.execute(query)
+      insert = Datenreinigung::Config["database"]["adapter"] == "mysql" ? "INSERT INTO matches (kunde1_id,kunde2_id,`key`,distance) VALUES" : "INSERT INTO matches (kunde1_id,kunde2_id,key,distance) VALUES"
+      ActiveRecord::Base.connection.execute("#{insert} (#{values.join('),(')} )")
     end
   end
   
@@ -30,7 +30,7 @@ class Detector
       
       (0..steps).each do |step|
         retrieve = Time.now
-        kunden = Kunde.all(:conditions => "kunden_keys.keyname = '#{key}'", :joins => :key, :order => 'value ASC', :offset => [step*STEPSIZE - WINDOWSIZE, 0].max, :limit => (step+1)*STEPSIZE)
+        kunden = Kunde.all(:conditions => "kunden_keys.keyname = '#{key}'", :joins => :key, :order => 'value ASC', :offset => [step*STEPSIZE - WINDOWSIZE, 0].max, :limit => STEPSIZE)
         
         next if kunden.empty?
         
