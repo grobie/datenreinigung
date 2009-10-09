@@ -16,7 +16,7 @@ class Detector
     end
     
     if Datenreinigung::Config["detector"]["save"] && !values.empty?
-      query = 'INSERT INTO matches (kunde1_id,kunde2_id,key,distance) VALUES (' + values.join('),(') + ')'
+      query = 'INSERT INTO matches (kunde1_id,kunde2_id,`key`,distance) VALUES (' + values.join('),(') + ')'
       ActiveRecord::Base.connection.execute(query)
     end
   end
